@@ -1,6 +1,6 @@
 spring:
   datasource:
-    hikari:
+#    hikari:
 #      jdbc-url: jdbc:mysql://localhost:3306/spring3_template?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
 #      username: root
 #      password: root
@@ -22,3 +22,9 @@ spring:
       lettuce:
         pool:
           min-idle: 0
+rocketmq:
+  name-server: 172.29.134.208:9876
+  producer:
+    group: pg_test
+  consumer:
+    group: cg_test
