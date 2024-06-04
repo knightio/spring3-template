@@ -14,6 +14,7 @@
     <description>web服务入口</description>
 
     <dependencies>
+
         <dependency>
             <groupId>cc.becurious</groupId>
             <artifactId>spring3-framework</artifactId>
@@ -26,8 +27,8 @@
 
         <!-- Mysql驱动包 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
 <!--        <dependency>-->
