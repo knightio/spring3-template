@@ -22,9 +22,3 @@ spring:
       lettuce:
         pool:
           min-idle: 0
-rocketmq:
-  name-server: 172.29.134.208:9876
-  producer:
-    group: pg_test
-  consumer:
-    group: cg_test
