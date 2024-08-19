@@ -34,14 +34,15 @@
                 <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </RollingFile>
-        <RollingFile name="sys-user" fileName="${log.path}/sys-user.log" filePattern="${log.path}/sys-user.%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="${log.pattern}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="1d" modulate="true"/>
-                <SizeBasedTriggeringPolicy size="10 MB"/>
-            </Policies>
-            <DefaultRolloverStrategy max="60"/>
-        </RollingFile>
+<!--        sys-user为log名称,暂无配置-->
+<!--        <RollingFile name="sys-user" fileName="${log.path}/sys-user.log" filePattern="${log.path}/sys-user.%d{yyyy-MM-dd}.log">-->
+<!--            <PatternLayout pattern="${log.pattern}"/>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy interval="1d" modulate="true"/>-->
+<!--                <SizeBasedTriggeringPolicy size="10 MB"/>-->
+<!--            </Policies>-->
+<!--            <DefaultRolloverStrategy max="60"/>-->
+<!--        </RollingFile>-->
     </Appenders>
 
     <Loggers>
@@ -50,9 +51,9 @@
         <!-- Spring日志级别控制  -->
         <logger name="org.springframework" level="warn" />
 
-        <logger name="sys-user" level="info">
-            <appenderRef ref="sys-user"/>
-        </logger>
+<!--        <logger name="sys-user" level="info">-->
+<!--            <appenderRef ref="sys-user"/>-->
+<!--        </logger>-->
 
         <root level="info">
             <AppenderRef ref="console" />
