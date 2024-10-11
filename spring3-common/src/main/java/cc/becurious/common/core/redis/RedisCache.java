@@ -22,4 +22,8 @@ public class RedisCache {
     public Object getCacheObject(String tokenKey) {
         return redisTemplate.opsForValue().get(tokenKey);
     }
+
+    public Boolean deleteObject(String userKey) {
+        return redisTemplate.delete(userKey);
+    }
 }

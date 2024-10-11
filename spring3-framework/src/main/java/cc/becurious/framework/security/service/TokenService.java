@@ -1,9 +1,10 @@
-package cc.becurious.framework.web.service;
+package cc.becurious.framework.security.service;
 
 import cc.becurious.common.constant.CacheConstants;
 import cc.becurious.common.constant.Constants;
 import cc.becurious.common.core.domain.LoginUser;
 import cc.becurious.common.core.redis.RedisCache;
+import cc.becurious.common.utils.StringUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwe;
@@ -15,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import javax.crypto.SecretKey;
 import java.util.*;
@@ -92,6 +92,18 @@ public class TokenService {
         return Jwts.builder().claims(claims).signWith(key,Jwts.SIG.HS512).compact();
     }
 
+    /**
+     * 删除用户身份信息
+     */
+    public void delLoginUser(String token)
+    {
+        if (StringUtils.isNotEmpty(token))
+        {
+            String userKey = getTokenKey(token);
+            redisCache.deleteObject(userKey);
+        }
+    }
+
     private Jwe<Claims> parseToken(String token)
     {
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
@@ -124,7 +136,7 @@ public class TokenService {
 
     private String getToken(HttpServletRequest request) {
         String token = request.getHeader(header);
-        if(ObjectUtils.isEmpty(token) && token.startsWith(prefix)){
+        if(StringUtils.isNotEmpty(token) && token.startsWith(prefix)){
             token = token.replace(prefix,"");
         }
         return token;

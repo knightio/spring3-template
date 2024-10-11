@@ -3,10 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.becurious.system.mapper.UserMapper">
+
+    <resultMap id="sysUserResultMap" type="cc.becurious.system.domain.SysUser">
+        <id property="id" column="id"/>
+        <result property="loginDate" column="login_date"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+
+    </resultMap>
+
+
     <update id="updateUser" parameterType="cc.becurious.system.domain.SysUser">
         update sys_user
         <set>
-            <if test="username != null and username != ''">user_name = ${username}</if>
+            <if test="username != null and username != ''">username = ${username}</if>
             <if test="password != null and password != ''">password = ${password}</if>
             <if test="loginDate != null">login_date = #{loginDate},</if>
         </set>
@@ -14,11 +24,11 @@
 
 
 
-    <select id="selectUserById" resultType="cc.becurious.system.domain.SysUser">
+    <select id="selectUserById" resultMap="sysUserResultMap">
         select * from sys_user where id = #{id}
     </select>
 
-    <select id="selectUserByUserName" resultType="cc.becurious.system.domain.SysUser">
+    <select id="selectUserByUserName" resultMap="sysUserResultMap">
         select * from sys_user where username = #{username}
     </select>
 
