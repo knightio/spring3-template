@@ -4,17 +4,17 @@ import org.springframework.security.core.Authentication;
 
 public class AuthenticationContextHolder {
 
-    private static final ThreadLocal<Authentication> contextHolder = new ThreadLocal<>();
+    public static final ThreadLocal<Authentication> contextHolder = new ThreadLocal<>();
 
-    private static Authentication getContext(){
+    public static Authentication getContext(){
         return contextHolder.get();
     }
 
-    private static void setContextHolder(Authentication authentication){
+    public static void setContextHolder(Authentication authentication){
         contextHolder.set(authentication);
     }
 
-    private static void clearContext(){
+    public static void clearContext(){
         contextHolder.remove();
     }
 

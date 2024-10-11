@@ -13,6 +13,8 @@ public class LoginUser implements UserDetails {
 
     private Long userId;
 
+    private Long deptId;
+
     private String username;
 
     private String password;
@@ -51,6 +53,14 @@ public class LoginUser implements UserDetails {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Long getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Long deptId) {
+        this.deptId = deptId;
     }
 
     public Long getUserId() {

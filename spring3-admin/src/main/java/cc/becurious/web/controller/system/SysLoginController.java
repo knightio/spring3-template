@@ -1,7 +1,7 @@
 package cc.becurious.web.controller.system;
 
 import cc.becurious.common.core.domain.LoginBody;
-import cc.becurious.framework.web.service.SysLoginService;
+import cc.becurious.framework.security.service.SysLoginService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
