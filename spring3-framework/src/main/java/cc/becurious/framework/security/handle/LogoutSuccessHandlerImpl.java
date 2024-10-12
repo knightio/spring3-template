@@ -2,9 +2,9 @@ package cc.becurious.framework.security.handle;
 
 import cc.becurious.common.core.domain.AjaxResult;
 import cc.becurious.common.core.domain.LoginUser;
+import cc.becurious.common.utils.JsonUtils;
 import cc.becurious.common.utils.ServletUtils;
 import cc.becurious.framework.security.service.TokenService;
-import com.alibaba.fastjson2.JSON;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,6 +29,6 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
             //删除redis用户信息
             tokenService.delLoginUser(loginUser.getToken());
         }
-        ServletUtils.renderString(response, JSON.toJSONString(AjaxResult.success("退出成功")));
+        ServletUtils.renderString(response, JsonUtils.toJSONString(AjaxResult.success("退出成功")));
     }
 }

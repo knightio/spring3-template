@@ -1,8 +1,8 @@
 package cc.becurious.framework.security.handle;
 
 import cc.becurious.common.core.domain.AjaxResult;
+import cc.becurious.common.utils.JsonUtils;
 import cc.becurious.common.utils.ServletUtils;
-import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,6 +28,6 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint, S
 
         String msg = MessageFormat.format("请求访问：{0}，认证失败，无法访问系统资源", request.getRequestURI());
 
-        ServletUtils.renderString(response, JSON.toJSONString(AjaxResult.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg)));
+        ServletUtils.renderString(response, JsonUtils.toJSONString(AjaxResult.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), msg)));
     }
 }

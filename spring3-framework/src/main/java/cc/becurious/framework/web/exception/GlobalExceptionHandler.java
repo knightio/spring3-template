@@ -13,8 +13,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public AjaxResult handleException(Exception e, HttpServletRequest request){
-        String requestURI = request.getRequestURI();
-        log.error("请求地址'{}',发生系统异常.", requestURI, e);
+        String requestUri = request.getRequestURI();
+        log.error("请求地址'{}',发生系统异常.", requestUri, e);
         return AjaxResult.error(e.getMessage());
     }
 }

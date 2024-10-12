@@ -1,5 +1,6 @@
 package cc.becurious.common.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -24,6 +25,8 @@ public class LoginUser implements UserDetails {
     private Long loginTime;
 
     private Long expireTime;
+
+    public LoginUser (){};
 
     public LoginUser (Long userId, String username, String password) {
         this.userId = userId;
@@ -95,21 +98,25 @@ public class LoginUser implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

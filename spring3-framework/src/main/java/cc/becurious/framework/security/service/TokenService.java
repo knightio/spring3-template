@@ -5,10 +5,8 @@ import cc.becurious.common.constant.Constants;
 import cc.becurious.common.core.domain.LoginUser;
 import cc.becurious.common.core.redis.RedisCache;
 import cc.becurious.common.utils.StringUtils;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Header;
-import io.jsonwebtoken.Jwe;
-import io.jsonwebtoken.Jwts;
+import cc.becurious.framework.security.jjwt.ClaimsVisitor;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.Resource;
@@ -28,7 +26,7 @@ public class TokenService {
     @Value("${token.header}")
     private String header;
 
-    // token 开头
+    // token 开头 ,无法带括号
     @Value("${token.prefix}")
     private String prefix;
 
@@ -104,23 +102,26 @@ public class TokenService {
         }
     }
 
-    private Jwe<Claims> parseToken(String token)
+//    private Jwe<Claims> parseToken(String token)
+//    {
+//        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+//        return Jwts.parser()
+//                .verifyWith(key)
+//                .build().parseEncryptedClaims(token);
+//
+//    }
+
+    private Claims getClaimsFromToken(String token)
     {
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
         return Jwts.parser()
                 .verifyWith(key)
-                .build().parseEncryptedClaims(token);
-
+                .build().parse(token).accept(new ClaimsVisitor());
     }
 
-    private Claims getClaimsFromToken(String token)
-    {
-        return parseToken(token).getPayload();
-    }
-
-    private Header getHeaderFromToken(String token){
-        return parseToken(token).getHeader();
-    }
+//    private Header getHeaderFromToken(String token){
+//        return parseToken(token).getHeader();
+//    }
 
     public LoginUser getLoginUser(HttpServletRequest request) {
         String token = getToken(request);
@@ -128,7 +129,8 @@ public class TokenService {
             Claims claims = getClaimsFromToken(token);
             String uuid = claims.get(Constants.LOGIN_USER_KEY).toString();
             String tokenKey = getTokenKey(uuid);
-            return (LoginUser) redisCache.getCacheObject(tokenKey);
+            Object cacheObject = redisCache.getCacheObject(tokenKey);
+            return redisCache.getCacheObject(tokenKey);
 
         }
         return null;
@@ -137,7 +139,7 @@ public class TokenService {
     private String getToken(HttpServletRequest request) {
         String token = request.getHeader(header);
         if(StringUtils.isNotEmpty(token) && token.startsWith(prefix)){
-            token = token.replace(prefix,"");
+            token = token.replace(prefix,"").strip();
         }
         return token;
     }
