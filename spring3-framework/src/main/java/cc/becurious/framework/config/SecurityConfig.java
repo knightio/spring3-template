@@ -80,13 +80,9 @@ public class SecurityConfig {
                     headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
                 })
                 // 认证失败处理类
-                .exceptionHandling(exceptionHandlingConfigurer -> {
-                    exceptionHandlingConfigurer.authenticationEntryPoint(authenticationEntryPoint);
-                })
+                .exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer.authenticationEntryPoint(authenticationEntryPoint))
                 // 基于token，所以不需要session
-                .sessionManagement((session) ->{
-                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                })
+                .sessionManagement((session) ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // 过滤请求
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/login").permitAll()
@@ -97,9 +93,7 @@ public class SecurityConfig {
                 );
 //                .httpBasic(withDefaults());
         // 添加Logout handler
-        httpSecurity.logout(logoutConfigurer -> {
-            logoutConfigurer.logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
-        });
+        httpSecurity.logout(logoutConfigurer -> logoutConfigurer.logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler));
         // 添加JWT filter
         httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter,UsernamePasswordAuthenticationFilter.class);
         // 添加CORS filter

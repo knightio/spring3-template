@@ -19,17 +19,17 @@ import java.util.Date;
 public class SysUser {
 
     @Schema(description = "id",example = "1")
-    Long id;
+    private Long id;
 
     @Schema(description = "用户名称", example = "张三")
-    String username;
+    private String username;
 
     @Schema(hidden = true)
-    String password;
+    private String password;
 
     @Schema(description = "登录时间", example = "2000-01-01 00:00:00")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    Date loginDate;
+    private Date loginDate;
 
 }
 
