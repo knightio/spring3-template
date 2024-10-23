@@ -29,7 +29,9 @@ public class RedisConfig implements CachingConfigurer {
         redisTemplate.setKeySerializer(new StringRedisSerializer());
 //        redisTemplate.setValueSerializer();//todo
 
+        //设置Jackson类型为实体，数组会有问题吗？
         ObjectMapper objectMapper = new ObjectMapper();
+        // JsonTypeInfo.As.PROPERTY：类型信息将作为JSON对象的一个属性包含在内@class or @type
         objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
 
 //        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);

@@ -8,12 +8,12 @@
         <id property="id" column="id"/>
         <result property="loginDate" column="login_date"/>
         <result property="username" column="username"/>
-<!--        <result property="password" column="password"/>-->
+        <result property="password" column="password"/>
 
     </resultMap>
 
     <sql id = "selectUserVo">
-        select id,login_date,username from sys_user
+        select id,login_date,username,password from sys_user
     </sql>
 
 

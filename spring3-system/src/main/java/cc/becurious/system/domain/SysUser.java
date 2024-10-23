@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 
@@ -14,12 +15,19 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "用户信息")
 public class SysUser {
 
+    @Schema(description = "id",example = "1")
     Long id;
+
+    @Schema(description = "用户名称", example = "张三")
     String username;
+
+    @Schema(hidden = true)
     String password;
 
+    @Schema(description = "登录时间", example = "2000-01-01 00:00:00")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     Date loginDate;
 

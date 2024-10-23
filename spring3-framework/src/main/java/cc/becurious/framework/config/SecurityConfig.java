@@ -90,6 +90,9 @@ public class SecurityConfig {
                 // 过滤请求
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/login").permitAll()
+                        // 静态资源，可匿名访问
+//                        .requestMatchers(HttpMethod.GET,  "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll()
+                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/webjars/**", "/*/api-docs/**", "/druid/**").permitAll()
                         .anyRequest().authenticated()
                 );
 //                .httpBasic(withDefaults());
