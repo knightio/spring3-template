@@ -20,7 +20,6 @@ steps:
 
 - task: Maven@4
   inputs:
-    azureSubscription: 'Azure subscription 1(3778c8e5-60f2-4071-90ed-9629382859db)'
     mavenPomFile: 'pom.xml'
     options: '-Dmaven.test.skip=true -Dautoconfig.skip -Ptest'
     publishJUnitResults: true
