@@ -21,7 +21,7 @@ steps:
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
-    options: '-Dmaven.test.skip=true -Dautoconfig.skip -Ptest'
+    options: '-Dmaven.test.skip=true -Dautoconfig.skip -P$(env)'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
